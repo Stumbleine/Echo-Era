@@ -6,9 +6,14 @@ export const authenticateSpotify = () => {
     "user-read-private",
     "user-read-email",
     "playlist-read-private",
+    "user-top-read", // ← Permite obtener los tracks/artistas más escuchados
+    "user-read-recently-played", // ← Permite obtener el historial de reproducción
+    "user-read-playback-state", // ← Permite obtener info de la reproducción actual
+    "user-modify-playback-state", // ← Permite controlar la reproducción
   ].join(" ");
 
-  const authUrl = `https://accounts.spotify.com/authorize?` +
+  const authUrl =
+    `https://accounts.spotify.com/authorize?` +
     `client_id=${CLIENT_ID}&` +
     `response_type=token&` +
     `redirect_uri=${encodeURIComponent(REDIRECT_URI)}&` +
@@ -28,4 +33,4 @@ const token = getAccessTokenFromUrl();
 if (token) {
   localStorage.setItem("spotify_token", token);
   window.history.pushState({}, "", "/");
-} 
+}

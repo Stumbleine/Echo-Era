@@ -9,9 +9,9 @@ import {
 import { RootState } from "./store";
 import AuthPage from "./features/auth/pages/AuthPage";
 import MainLayout from "./layouts/MainLayout";
-import SongsPage from "./features/songs/pages/SongsPage";
 import ArtistsPage from "./features/artists/pages/ArtistsPage";
 import { useEffect } from "react";
+import TracksPage from "./features/tracks/pages/TracksPage";
 
 export const RouteTracker = () => {
   const location = useLocation();
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <MainLayout />,
         children: [
-          { index: true, element: <SongsPage /> },
+          { index: true, element: <TracksPage /> },
           { path: "artists", element: <ArtistsPage /> },
         ],
       },

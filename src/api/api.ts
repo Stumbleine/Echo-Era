@@ -13,3 +13,16 @@ export const fetchCategories = async () => {
   });
   return response.json();
 };
+
+export const fetchTopTracks = async () => {
+  const response = await fetch(`${SPOTIFY_API_BASE_URL}/me/top/tracks`, {
+    headers:getHeaders()
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching tracks");
+  }
+
+  return response.json();
+};
+

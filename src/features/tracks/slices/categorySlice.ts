@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoriesThunk } from "../thunks/fetchCategoriesThunk";
+import { fetchCategoriesThunk } from "../thunks/categoriesThunk";
 
-const defaultCategories = ["Pop", "Rock", "Hip-Hop", "Electronic", "Jazz"];
-
-interface Category{
-  href: string
-  name: string
-  id: string,
-  icons: []
+interface Category {
+  href: string;
+  name: string;
+  id: string;
+  icons: [];
 }
 
 interface CategoryState {
@@ -17,7 +15,7 @@ interface CategoryState {
 }
 
 const initialState: CategoryState = {
-  categories: [], // Usa valores por defecto hasta que cargue la API
+  categories: [],
   loading: false,
   error: null,
 };

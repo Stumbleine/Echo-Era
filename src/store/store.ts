@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import categoryReducer from "../features/songs/slices/categorySlice";
-import authReducer from "../features/auth/slices/authSlice"
+import categoryReducer from "../features/tracks/slices/categorySlice";
+import authReducer from "../features/auth/slices/authSlice";
+import trackReducer from "../features/tracks/slices/trackSlice";
 
 export const store = configureStore({
   reducer: {
     categories: categoryReducer,
-    auth: authReducer
+    auth: authReducer,
+    tracks: trackReducer,
   },
 });
 

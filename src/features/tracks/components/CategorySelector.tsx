@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { AppDispatch } from "../../../store/store";
-import { fetchCategoriesThunk } from "../thunks/fetchCategoriesThunk";
+import { fetchCategoriesThunk } from "../thunks/categoriesThunk";
 
 const CategorySelector: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,12 +13,12 @@ const CategorySelector: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
       <Typography
-        color="textSecondary"
+        fontWeight="bold"
         variant="body1"
         sx={{ lineHeight: 1.4 }}
         gutterBottom

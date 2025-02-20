@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { colors } from "./colors";
 
-
 const sharedPalette = {
   secondary: {
     main: colors.skyMain,
@@ -75,6 +74,7 @@ const darkTheme = createTheme({
           "&:hover": {
             boxShadow: "0 6px 16px rgba(0, 0, 0, 0.4)",
             backgroundColor: "rgba(28, 39, 69, 0.8)",
+            color: "white",
           },
         },
       },
