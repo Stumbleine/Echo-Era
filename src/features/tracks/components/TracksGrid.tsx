@@ -64,6 +64,7 @@ const TrackList: FC<{ tracks: Track[] }> = ({ tracks }) => {
                     {track.artists[0].name}
                   </Typography>
                 </CardContent>
+                {}
               </CardActionArea>
             </Card>
           </Grid2>

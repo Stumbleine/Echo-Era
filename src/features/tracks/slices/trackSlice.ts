@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Track } from "../../../models/Track";
-import { fetchTopTracksThunk } from "../thunks/tracksThunk";
+import {
+  fetchRecommendationsThunk,
+  fetchTopTracksThunk,
+  fetchTracksWithFiltersThunk,
+} from "../thunks/tracksThunk";
 
 interface TrackState {
   tracks: Track[];
@@ -29,16 +33,28 @@ const trackSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTopTracksThunk.pending, (state) => {
+      .addCase(fetchRecommendationsThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchTopTracksThunk.fulfilled, (state, action) => {
+      .addCase(fetchRecommendationsThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.tracks = action.payload;
         state.featuredTrack = action.payload[0];
       })
-      .addCase(fetchTopTracksThunk.rejected, (state, action) => {
+      .addCase(fetchRecommendationsThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchTracksWithFiltersThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTracksWithFiltersThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tracks = action.payload;
+      })
+      .addCase(fetchTracksWithFiltersThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

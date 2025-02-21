@@ -1,19 +1,30 @@
 import { Chip, Grid2, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { AppDispatch } from "../../../store/store";
 import { fetchCategoriesThunk } from "../thunks/categoriesThunk";
+import { Category } from "../../../models/Category";
 
-const CategorySelector: React.FC = () => {
+const CategorySelector: React.FC<{
+  onCategoryChange: (category: string) => void;
+}> = ({ onCategoryChange }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { categories, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
 
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
-  }, []);
+  }, [dispatch]);
+
+  const handleCategoryClick = (category: string) => {
+    const newCategory = category === selectedCategory ? "" : category;
+    setSelectedCategory(newCategory);
+    onCategoryChange(newCategory);
+  };
 
   return (
     <>
@@ -35,7 +46,13 @@ const CategorySelector: React.FC = () => {
         <Grid2 container spacing={1}>
           {categories.map((category, index) => (
             <Grid2 key={index}>
-              <Chip size="small" label={category?.name} />
+              <Chip
+                size="small"
+                label={category?.name}
+                clickable
+                color={selectedCategory === category.id ? "primary" : "default"}
+                onClick={() => handleCategoryClick(category.id)}
+              />
             </Grid2>
           ))}
         </Grid2>

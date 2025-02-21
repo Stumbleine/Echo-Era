@@ -22,10 +22,21 @@ export const authenticateSpotify = () => {
   window.location.href = authUrl;
 };
 
-export const getAccessTokenFromUrl = () => {
+const getAccessTokenFromUrl = () => {
   const hash = window.location.hash.substring(1);
   const params = new URLSearchParams(hash);
-  return params.get("access_token");
+  const accessToken = params.get("access_token");
+  const expiresIn = params.get("expires_in"); // Tiempo en segundos
+
+  if (accessToken && expiresIn) {
+    const expirationTime = Date.now() + Number(expiresIn) * 1000;
+    localStorage.setItem("spotify_token", accessToken);
+    localStorage.setItem("spotify_token_expiration", expirationTime.toString());
+    window.history.pushState({}, "", "/");
+    return accessToken;
+  }
+
+  return null;
 };
 
 const token = getAccessTokenFromUrl();
@@ -34,3 +45,23 @@ if (token) {
   localStorage.setItem("spotify_token", token);
   window.history.pushState({}, "", "/");
 }
+
+const checkTokenExpiration = () => {
+  const expirationTime = localStorage.getItem("spotify_token_expiration");
+
+  if (!expirationTime || Date.now() > Number(expirationTime)) {
+    localStorage.removeItem("spotify_token");
+    localStorage.removeItem("spotify_token_expiration");
+    return true;
+  }
+
+  return false;
+};
+
+export const getValidAccessToken = () => {
+  if (checkTokenExpiration()) {
+    authenticateSpotify();
+    return null;
+  }
+  return localStorage.getItem("spotify_token");
+};

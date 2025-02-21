@@ -13,7 +13,7 @@ import ArtistsPage from "./features/artists/pages/ArtistsPage";
 import { useEffect } from "react";
 import TracksPage from "./features/tracks/pages/TracksPage";
 
-export const RouteTracker = () => {
+const RouteTracker = () => {
   const location = useLocation();
   const navigationType = useNavigationType();
 
@@ -46,12 +46,7 @@ const PrivateRoute = () => {
 const router = createBrowserRouter([
   {
     path: "/auth",
-    element: (
-      <>
-        <AuthPage />
-        <RouteTracker />
-      </>
-    ),
+    element: <AuthPage />,
   },
   {
     path: "/",

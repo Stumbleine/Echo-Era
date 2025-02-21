@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCategoriesThunk } from "../thunks/categoriesThunk";
-
-interface Category {
-  href: string;
-  name: string;
-  id: string;
-  icons: [];
-}
+import { Category } from "../../../models/Category";
 
 interface CategoryState {
   categories: Category[];
