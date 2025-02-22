@@ -1,20 +1,32 @@
 import { RouterProvider } from "react-router";
 
 import { ThemeContextProvider } from "./context/ThemeContext";
-import { Provider } from "react-redux";
-import { store } from "./store";
 import router from "./router";
-import { AuthProvider } from "./context/AuthContext";
+import { getAccessTokenFromUrl } from "./api/authSpotify";
+
+window.addEventListener("load", () => {
+  const token = getAccessTokenFromUrl();
+  if (token) {
+    localStorage.setItem("spotify_token", token);
+    window.history.pushState({}, "", "/");
+  }
+});
 
 function App() {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const tokenFromUrl = getAccessTokenFromUrl();
+  //   const tokenStoraged = localStorage.getItem("spotify_token");
+  //   console.log("se ejecuto aca en app.tsx", tokenFromUrl);
+  //   if (tokenFromUrl || tokenStoraged) {
+  //     const token = tokenFromUrl || tokenStoraged;
+  //     dispatch(login(token!));
+  //   }
+  // }, [dispatch]);
   return (
-    <AuthProvider>
-      <ThemeContextProvider>
-        <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
-      </ThemeContextProvider>
-    </AuthProvider>
+    <ThemeContextProvider>
+      <RouterProvider router={router} />
+    </ThemeContextProvider>
   );
 }
 

@@ -6,10 +6,10 @@ export const authenticateSpotify = () => {
     "user-read-private",
     "user-read-email",
     "playlist-read-private",
-    "user-top-read", // ← Permite obtener los tracks/artistas más escuchados
-    "user-read-recently-played", // ← Permite obtener el historial de reproducción
-    "user-read-playback-state", // ← Permite obtener info de la reproducción actual
-    "user-modify-playback-state", // ← Permite controlar la reproducción
+    "user-top-read",
+    "user-read-recently-played",
+    "user-read-playback-state",
+    "user-modify-playback-state",
   ].join(" ");
 
   const authUrl =
@@ -22,11 +22,11 @@ export const authenticateSpotify = () => {
   window.location.href = authUrl;
 };
 
-const getAccessTokenFromUrl = () => {
+export const getAccessTokenFromUrl = () => {
   const hash = window.location.hash.substring(1);
   const params = new URLSearchParams(hash);
   const accessToken = params.get("access_token");
-  const expiresIn = params.get("expires_in"); // Tiempo en segundos
+  const expiresIn = params.get("expires_in");
 
   if (accessToken && expiresIn) {
     const expirationTime = Date.now() + Number(expiresIn) * 1000;
@@ -38,13 +38,6 @@ const getAccessTokenFromUrl = () => {
 
   return null;
 };
-
-const token = getAccessTokenFromUrl();
-
-if (token) {
-  localStorage.setItem("spotify_token", token);
-  window.history.pushState({}, "", "/");
-}
 
 const checkTokenExpiration = () => {
   const expirationTime = localStorage.getItem("spotify_token_expiration");
@@ -65,3 +58,10 @@ export const getValidAccessToken = () => {
   }
   return localStorage.getItem("spotify_token");
 };
+
+const token = getAccessTokenFromUrl();
+
+if (token) {
+  localStorage.setItem("spotify_token", token);
+  window.history.pushState({}, "", "/");
+}
