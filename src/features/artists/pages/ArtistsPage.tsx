@@ -12,8 +12,7 @@ import {
 import React from "react";
 import SearchBar from "../../../shared/SearchBar";
 import InfiniteArtists from "../components/InfiniteArtists";
-
-const markets: string[] = ["CA", "BR", "IT"];
+import { MARKETS } from "../../../constants/Market";
 
 const ArtistsPage = () => {
   const [market, setMarket] = React.useState("");
@@ -48,7 +47,7 @@ const ArtistsPage = () => {
                   onChange={handleChange}
                 >
                   <MenuItem value={"All"}>All</MenuItem>
-                  {markets.map((market, index) => (
+                  {MARKETS.map((market, index) => (
                     <MenuItem key={index} value={market}>
                       {market}
                     </MenuItem>

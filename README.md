@@ -1,6 +1,7 @@
 # Echo Era
 
 Echo Era es una aplicación que te permite explorar tus artistas, canciones y playlists favoritas utilizando la API de Spotify.
+En Echo Era puedes explorar musica infinitamente filtrando por decadas y géneros, buscar tus artistas favoritos, y reexplorar en "Your Echoes" los ecos que te definen y te han definido a lo largo de tu viaje en Spotify.
 
 ## Requisitos Previos
 

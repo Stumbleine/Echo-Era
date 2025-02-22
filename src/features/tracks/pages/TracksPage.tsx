@@ -30,7 +30,7 @@ const TracksPage = () => {
         {featuredTrack && <Cover featuredTrack={featuredTrack} />}
         <Stack direction="column" spacing={2} sx={{ p: 8, pt: 10, m: 0 }}>
           <Typography fontWeight="bold" variant="h3" textAlign="center">
-            Explore more in decades
+            Explore music through the decades
           </Typography>
           <DecadeSelector onDecadeChange={handleDecadeChange} />
           <Button onClick={() => setFiltersOpen(!filtersOpen)}>

@@ -4,30 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 import { fetchCategoriesThunk } from "../thunks/categoriesThunk";
 import { Genre } from "../../../models/Genre";
-
-const genres: Genre[] = [
-  { id: "all", name: "All" },
-  { id: "pop", name: "Pop" },
-  { id: "rock", name: "Rock" },
-  { id: "hip-hop", name: "Hip-Hop" },
-  { id: "electronic", name: "Electronic" },
-  { id: "jazz", name: "Jazz" },
-  { id: "classical", name: "Classical" },
-  { id: "country", name: "Country" },
-  { id: "reggae", name: "Reggae" },
-  { id: "blues", name: "Blues" },
-  { id: "metal", name: "Metal" },
-  { id: "indie", name: "Indie" },
-  { id: "r-n-b", name: "R&B" },
-  { id: "latin", name: "Latin" },
-  { id: "k-pop", name: "K-Pop" },
-  { id: "edm", name: "EDM" },
-  { id: "folk", name: "Folk" },
-  { id: "soul", name: "Soul" },
-  { id: "funk", name: "Funk" },
-  { id: "punk", name: "Punk" },
-  { id: "ambient", name: "Ambient" },
-];
+import { GENRES } from "../../../constants/Genres";
 
 const GenreSelector: React.FC<{
   onGenreChange: (genre: string) => void;
@@ -57,7 +34,7 @@ const GenreSelector: React.FC<{
       </Typography>
 
       <Grid2 container spacing={1}>
-        {genres.map((genre, index) => (
+        {GENRES.map((genre, index) => (
           <Grid2 key={index}>
             <Chip
               size="small"
