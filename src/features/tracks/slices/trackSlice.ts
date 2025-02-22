@@ -1,16 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Track } from "../../../models/Track";
-import {
-  fetchRecommendationsThunk,
-  fetchTopTracksThunk,
-  fetchTracksWithFiltersThunk,
-} from "../thunks/tracksThunk";
+import { fetchTracksWithFiltersThunk } from "../thunks/tracksThunk";
 
 interface TrackState {
   tracks: Track[];
   featuredTrack: Track | null;
   loading: boolean;
   error: string | null;
+  offset: number;
+  hasMore: boolean;
 }
 
 const initialState: TrackState = {
@@ -18,6 +16,8 @@ const initialState: TrackState = {
   featuredTrack: null,
   loading: false,
   error: null,
+  offset: 0,
+  hasMore: true,
 };
 
 const trackSlice = createSlice({
@@ -30,29 +30,23 @@ const trackSlice = createSlice({
     setFeaturedTrack: (state, action: PayloadAction<Track>) => {
       state.featuredTrack = action.payload;
     },
+    resetTracks: (state) => {
+      state.tracks = [];
+      state.offset = 0;
+      state.hasMore = true;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchRecommendationsThunk.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchRecommendationsThunk.fulfilled, (state, action) => {
-        state.loading = false;
-        state.tracks = action.payload;
-        state.featuredTrack = action.payload[0];
-      })
-      .addCase(fetchRecommendationsThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
       .addCase(fetchTracksWithFiltersThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchTracksWithFiltersThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.tracks = action.payload;
+        state.tracks = [...state.tracks, ...action.payload];
+        state.offset = state.tracks.length;
+        state.hasMore = action.payload.length > 0;
       })
       .addCase(fetchTracksWithFiltersThunk.rejected, (state, action) => {
         state.loading = false;
@@ -61,5 +55,5 @@ const trackSlice = createSlice({
   },
 });
 
-export const { setTracks, setFeaturedTrack } = trackSlice.actions;
+export const { setTracks, setFeaturedTrack, resetTracks } = trackSlice.actions;
 export default trackSlice.reducer;

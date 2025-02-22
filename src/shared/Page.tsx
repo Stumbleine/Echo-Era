@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { FC, ReactNode } from "react";
 
 const Page: FC<{ children: ReactNode }> = ({ children }) => {
@@ -9,7 +9,7 @@ const Page: FC<{ children: ReactNode }> = ({ children }) => {
         position: "relative",
       }}
     >
-      {children} {/* contenido de la */}
+      {children}
       {/* <Box
         component="footer"
         sx={{

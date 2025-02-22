@@ -33,7 +33,7 @@ const DecadeSelector: FC<{ onDecadeChange: (decade: number) => void }> = ({
 
   return (
     <Box>
-      <Typography fontWeight="bold" gutterBottom>
+      <Typography fontWeight="bold" variant="h6" gutterBottom>
         Selecciona una Década
       </Typography>
       <Slider

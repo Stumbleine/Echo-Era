@@ -1,14 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Track } from "../../../models/Track";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 
 const Cover: FC<{ featuredTrack: Track }> = ({ featuredTrack }) => {
   return (

@@ -9,7 +9,6 @@ const moods = [
   { label: "Feliz", value: "happy" },
   { label: "Triste", value: "sad" },
   { label: "Relajado", value: "chill" },
-  // Agrega más estados de ánimo según sea necesario
 ];
 
 const MoodSelector: React.FC<MoodSelectorProps> = ({ onMoodChange }) => {
@@ -23,7 +22,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({ onMoodChange }) => {
 
   return (
     <>
-      <Typography variant="body1" fontWeight="bold" gutterBottom>
+      <Typography variant="body1" fontWeight="bold" gutterBottom sx={{ my: 2 }}>
         Selecciona un Estado de Ánimo
       </Typography>
       <Stack direction="row" spacing={1}>

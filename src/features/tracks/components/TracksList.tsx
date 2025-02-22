@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import {
   Box,
   Card,
@@ -23,12 +23,12 @@ const TrackList: FC<{ tracks: Track[] }> = ({ tracks }) => {
 
   return (
     <Box>
-      <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>
-        Top Songs
+      <Typography variant="h4" fontWeight="bold" sx={{ my: 2 }}>
+        Songs
       </Typography>
       <Grid2 container spacing={2}>
-        {tracks.map((track, index) => (
-          <Grid2 key={index} size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}>
+        {tracks.map((track) => (
+          <Grid2 key={track.id} size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}>
             <Card
               sx={{
                 backgroundColor: colors[track.album.images[0].url] || "white",

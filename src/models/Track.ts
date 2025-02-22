@@ -11,7 +11,11 @@ export interface Track {
   external_urls: {
     spotify: string;
   };
+  popularity: 0;
+  track_number: 0;
 }
 
-
-
+export interface RecentTrack {
+  track: Track;
+  played_at: string;
+}

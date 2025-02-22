@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Track } from "../models/Track";
+// @ts-ignore
 import ColorThief from "colorthief";
 import { AlbumColor } from "../models/Album";
 
