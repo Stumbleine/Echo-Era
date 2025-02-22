@@ -1,22 +1,19 @@
 import {
   AppBar,
-  Box,
   Button,
-  IconButton,
   Menu,
   MenuItem,
   Stack,
   Toolbar,
+  Typography,
 } from "@mui/material";
-import { useThemeContext } from "../context/ThemeContext";
 import { Link, Outlet } from "react-router";
 import Page from "../shared/Page";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../features/auth/slices/authSlice";
 
 const MainLayout = () => {
-  const { darkMode, toggleTheme } = useThemeContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,11 +23,24 @@ const MainLayout = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = "https://accounts.spotify.com/en/logout";
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1000);
+  };
+
   return (
     <>
       <AppBar elevation={0}>
         <Toolbar>
-          <Box>logo</Box>
+          <Typography fontWeight="bold" variant="h5" sx={{ mr: 2 }}>
+            Echo Era
+          </Typography>
           <Stack
             direction="row"
             sx={{
@@ -91,26 +101,9 @@ const MainLayout = () => {
               </MenuItem>
             </Menu>
           </Stack>
-          <Box
-            component={IconButton}
-            color="textIcon"
-            size="small"
-            onClick={toggleTheme}
-            sx={{
-              zIndex: 99,
-              position: "relative",
-              top: "auto",
-              "&:hover": {
-                color: "primary.main",
-              },
-            }}
-          >
-            {darkMode ? (
-              <FontAwesomeIcon icon={faSun} />
-            ) : (
-              <FontAwesomeIcon icon={faMoon} />
-            )}
-          </Box>
+          <Button variant="contained" size="small" onClick={handleLogout}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Page>

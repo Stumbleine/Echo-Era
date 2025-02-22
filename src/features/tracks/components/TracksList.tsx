@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import {
   Box,
   Card,
@@ -13,22 +13,20 @@ import { useAlbumColors } from "../../../hooks/useAlbumsColors";
 import { useDispatch } from "react-redux";
 import { setFeaturedTrack } from "../slices/trackSlice";
 
-const TrackList: FC<{ tracks: Track[] }> = ({ tracks }) => {
+const TrackList: FC<{ tracks: Track[] }> = memo(({ tracks }) => {
   const colors = useAlbumColors(tracks);
   const dispatch = useDispatch();
 
   const handleClick = (track: Track) => {
     dispatch(setFeaturedTrack(track));
+    window.open(track.external_urls.spotify, "_blank");
   };
 
   return (
     <Box>
-      <Typography variant="h4" fontWeight="bold" sx={{ my: 2 }}>
-        Songs
-      </Typography>
       <Grid2 container spacing={2}>
         {tracks.map((track) => (
-          <Grid2 key={track.id} size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}>
+          <Grid2 key={track.id} size={{ xs: 6, sm: 4, md: 3, lg: 2, xl: 2 }}>
             <Card
               sx={{
                 backgroundColor: colors[track.album.images[0].url] || "white",
@@ -60,7 +58,11 @@ const TrackList: FC<{ tracks: Track[] }> = ({ tracks }) => {
                   >
                     {track.name}
                   </Typography>
-                  <Typography textAlign="center" variant="body1">
+                  <Typography
+                    textAlign="center"
+                    variant="body1"
+                    color="textSecondary"
+                  >
                     {track.artists[0].name}
                   </Typography>
                 </CardContent>
@@ -72,6 +74,6 @@ const TrackList: FC<{ tracks: Track[] }> = ({ tracks }) => {
       </Grid2>
     </Box>
   );
-};
+});
 
 export default TrackList;

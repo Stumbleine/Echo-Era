@@ -4,11 +4,11 @@ import { Playlist } from "../../../models/Playlist";
 
 export const fetchUserPlaylistsThunk = createAsyncThunk<
   Playlist[],
-  { limit: number; offset: number },
+  { limit: number; offset?: number },
   { rejectValue: string }
 >(
   "playlists/fetchUserPlaylists",
-  async ({ limit, offset }, { rejectWithValue }) => {
+  async ({ limit, offset = 0 }, { rejectWithValue }) => {
     try {
       const data = await fetchUserPlaylists(limit, offset);
       return data.items;

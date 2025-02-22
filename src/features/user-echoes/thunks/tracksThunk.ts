@@ -6,26 +6,22 @@ export const fetchRecentlyPlayedThunk = createAsyncThunk<
   RecentTrack[],
   { limit: number; after?: number },
   { rejectValue: string }
->(
-  "tracks/fetchRecentlyPlayed",
-  async ({ limit, after }, { rejectWithValue }) => {
-    try {
-      const data = await fetchRecentlyPlayed(limit, after);
-      return data.items;
-    } catch (error: any) {
-      return rejectWithValue(
-        error.message || "Failed to fetch recently played tracks"
-      );
-    }
+>("tracks/fetchRecentlyPlayed", async ({ limit = 20 }, { rejectWithValue }) => {
+  try {
+    const data = await fetchRecentlyPlayed(limit);
+    return data.items;
+  } catch (error: any) {
+    return rejectWithValue(
+      error.message || "Failed to fetch recently played tracks"
+    );
   }
-);
+});
 
 export const fetchTopTracksThunk = createAsyncThunk(
   "top-tracks/fetch",
   async (_, { rejectWithValue }) => {
     try {
       const data = await fetchTopTracks();
-      console.log("data", data.items);
       return data?.items;
     } catch (error: any) {
       if (error.response) {

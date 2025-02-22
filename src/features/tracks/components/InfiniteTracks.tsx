@@ -40,6 +40,9 @@ const InfiniteTracks: FC<{ genre: string; decade: number }> = ({
 
   return (
     <Box>
+      <Typography variant="h4" fontWeight="bold" sx={{ my: 2 }}>
+        Songs
+      </Typography>
       <TrackList tracks={tracks} />
       {loading && (
         <Stack

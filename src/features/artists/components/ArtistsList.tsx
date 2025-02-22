@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Artist } from "../../../models/Artist";
 import {
   Box,
@@ -10,17 +10,21 @@ import {
   Typography,
 } from "@mui/material";
 
-const ArtistsList: FC<{ artists: Artist[] }> = ({ artists }) => {
+const ArtistsList: FC<{ artists: Artist[] }> = memo(({ artists }) => {
   return (
     <Grid2 container spacing={2}>
       {artists.map((artist) => (
-        <Grid2 key={artist.id} size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}>
+        <Grid2 key={artist.id} size={{ xs: 6, sm: 4, md: 3, lg: 2, xl: 2 }}>
           <Card
             sx={{
               borderRadius: 5,
             }}
           >
-            <CardActionArea>
+            <CardActionArea
+              onClick={() => {
+                window.open(artist.external_urls.spotify, "_blank");
+              }}
+            >
               <CardContent>
                 <Box
                   style={{
@@ -51,8 +55,12 @@ const ArtistsList: FC<{ artists: Artist[] }> = ({ artists }) => {
                 >
                   {artist.name}
                 </Typography>
-                <Typography textAlign="center" variant="body1">
-                  {artist.followers.total}
+                <Typography
+                  color="textSecondary"
+                  textAlign="center"
+                  variant="body1"
+                >
+                  followers: {artist.followers.total}
                 </Typography>
               </CardContent>
               {}
@@ -62,6 +70,6 @@ const ArtistsList: FC<{ artists: Artist[] }> = ({ artists }) => {
       ))}
     </Grid2>
   );
-};
+});
 
 export default ArtistsList;

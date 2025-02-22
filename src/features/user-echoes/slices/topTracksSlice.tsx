@@ -22,7 +22,7 @@ const topTracksSlice = createSlice({
   name: "albums",
   initialState,
   reducers: {
-    resetAlbums: (state) => {
+    resetTracks: (state) => {
       state.topTracks = [];
       state.offset = 0;
       state.hasMore = true;
@@ -47,5 +47,5 @@ const topTracksSlice = createSlice({
   },
 });
 
-export const { resetAlbums } = topTracksSlice.actions;
+export const { resetTracks } = topTracksSlice.actions;
 export default topTracksSlice.reducer;

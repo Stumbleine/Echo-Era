@@ -13,7 +13,6 @@ const decades = [
   { value: 2020, label: "2020s" },
 ];
 
-// Crear marks normalizados (0 a 8 para 9 décadas)
 const normalizedMarks = decades.map((decade, index) => ({
   value: index,
   label: decade.label,
@@ -27,7 +26,6 @@ const DecadeSelector: FC<{ onDecadeChange: (decade: number) => void }> = ({
   const handleChange = (_event: Event, newValue: number | number[]) => {
     const index = Array.isArray(newValue) ? newValue[0] : newValue;
     setSelectedIndex(index);
-    // Convertir el índice normalizado al valor real de la década
     onDecadeChange(decades[index].value);
   };
 
@@ -55,7 +53,6 @@ const DecadeSelector: FC<{ onDecadeChange: (decade: number) => void }> = ({
           "& .MuiSlider-markLabel": {
             marginTop: "8px",
           },
-          // Mejorar la visibilidad de las marcas y etiquetas
           "& .MuiSlider-rail": {
             opacity: 0.5,
           },

@@ -7,21 +7,10 @@ const Page: FC<{ children: ReactNode }> = ({ children }) => {
       sx={{
         height: "90vh",
         position: "relative",
+        mt: 8,
       }}
     >
       {children}
-      {/* <Box
-        component="footer"
-        sx={{
-          textAlign: "center",
-          mt: "auto",
-          py: 2,
-        }}
-      >
-        <Typography variant="body2" color="textSecondary">
-          © 2025 criswaves. All rights reserved.
-        </Typography>
-      </Box> */}
     </Box>
   );
 };

@@ -9,10 +9,7 @@ export interface Playlist {
   external_urls: {
     spotify: string;
   };
-  followers: {
-    href: string;
-    total: string;
-  };
+
   tracks: {
     items: Track[];
     total: number;

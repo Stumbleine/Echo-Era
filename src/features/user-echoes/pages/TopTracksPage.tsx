@@ -4,21 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTopTracksThunk } from "../thunks/tracksThunk";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import TrackList from "../../tracks/components/TracksList";
+import { resetTracks } from "../slices/topTracksSlice";
 
 const TopTracksPage = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { topTracks } = useSelector((state: RootState) => state.topTracks);
+  const { topTracks, loading } = useSelector(
+    (state: RootState) => state.topTracks
+  );
 
   useEffect(() => {
-    dispatch(fetchTopTracksThunk());
+    dispatch(resetTracks());
+    if (!loading) {
+      dispatch(fetchTopTracksThunk());
+    }
   }, []);
+
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Box>
         <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
           <Typography fontWeight="bold" variant="h4">
-            Your Top Artists
+            Your Top Songs
           </Typography>
         </Stack>
         <TrackList tracks={topTracks} />

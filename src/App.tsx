@@ -6,6 +6,8 @@ import { getAccessTokenFromUrl } from "./api/authSpotify";
 
 window.addEventListener("load", () => {
   const token = getAccessTokenFromUrl();
+  console.log("apptsx", localStorage);
+
   if (token) {
     localStorage.setItem("spotify_token", token);
     window.history.pushState({}, "", "/");
@@ -13,16 +15,6 @@ window.addEventListener("load", () => {
 });
 
 function App() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const tokenFromUrl = getAccessTokenFromUrl();
-  //   const tokenStoraged = localStorage.getItem("spotify_token");
-  //   console.log("se ejecuto aca en app.tsx", tokenFromUrl);
-  //   if (tokenFromUrl || tokenStoraged) {
-  //     const token = tokenFromUrl || tokenStoraged;
-  //     dispatch(login(token!));
-  //   }
-  // }, [dispatch]);
   return (
     <ThemeContextProvider>
       <RouterProvider router={router} />

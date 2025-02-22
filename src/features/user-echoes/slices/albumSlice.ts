@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Album } from "../../../models/Album";
+import { ItemAlbum } from "../../../models/Album";
 import { fetchSavedAlbumsThunk } from "../thunks/albumsThunk";
 
 interface AlbumState {
-  albums: Album[];
+  albums: ItemAlbum[];
   loading: boolean;
   error: string | null;
   offset: number;

@@ -1,10 +1,23 @@
 import { FC } from "react";
 import { Track } from "../../../models/Track";
-import { Box, Button, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, Typography } from "@mui/material";
 
 const Cover: FC<{ featuredTrack: Track }> = ({ featuredTrack }) => {
   return (
-    <Paper sx={{ height: 400, bgcolor: "background.paper" }}>
+    <Box sx={{ height: 400, position: "relative" }}>
+      <Box
+        component="img"
+        src={"/cover.jpg"}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1,
+        }}
+      />
       <Stack
         direction="column"
         spacing={2}
@@ -30,11 +43,19 @@ const Cover: FC<{ featuredTrack: Track }> = ({ featuredTrack }) => {
             </Typography>
             <Typography gutterBottom>{featuredTrack.album.name}</Typography>
             <Typography gutterBottom>{featuredTrack.duration_ms}</Typography>
-            <Button variant="contained">Play on Spotify</Button>
+            <Button
+              LinkComponent={Link}
+              href={featuredTrack.external_urls.spotify}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="contained"
+            >
+              Play on Spotify
+            </Button>
           </Box>
         </Stack>
       </Stack>
-    </Paper>
+    </Box>
   );
 };
 

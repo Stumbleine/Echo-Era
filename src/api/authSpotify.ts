@@ -10,6 +10,7 @@ export const authenticateSpotify = () => {
     "user-read-recently-played",
     "user-read-playback-state",
     "user-modify-playback-state",
+    "user-library-read",
   ].join(" ");
 
   const authUrl =
@@ -64,4 +65,5 @@ const token = getAccessTokenFromUrl();
 if (token) {
   localStorage.setItem("spotify_token", token);
   window.history.pushState({}, "", "/");
+  console.log("authSpotifyVerification", localStorage);
 }

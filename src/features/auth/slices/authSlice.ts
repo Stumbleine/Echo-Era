@@ -6,7 +6,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  isAuthenticated: !!localStorage.getItem("spotify_token"), // Verifica si ya hay un token guardado
+  isAuthenticated: !!localStorage.getItem("spotify_token"),
   token: localStorage.getItem("spotify_token"),
 };
 
@@ -19,9 +19,9 @@ const authSlice = createSlice({
       state.token = action.payload;
     },
     logout: (state) => {
-      state.isAuthenticated = false;
-      state.token = null;
       localStorage.removeItem("spotify_token");
+      state.token = null;
+      state.isAuthenticated = false;
     },
   },
 });

@@ -45,6 +45,7 @@ const trackSlice = createSlice({
       .addCase(fetchTracksWithFiltersThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.tracks = [...state.tracks, ...action.payload];
+        state.featuredTrack = state.tracks[0];
         state.offset = state.tracks.length;
         state.hasMore = action.payload.length > 0;
       })
